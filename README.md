@@ -3,14 +3,14 @@ A sleek and interactive to-do list application using HTML, CSS, and JavaScript, 
 
 Navigate into the /dist directory of the project:
 
-cd dist
+```cd dist```
 
 Install all node dependencies:
 
-npm install
+```npm install```
 
 Run/Watch the build process:
 
-npm run watch
+```npm run watch```
 
 Open the dist/index.html in Google Chrome
