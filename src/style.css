@@ -1,0 +1,153 @@
+@font-face {
+    font-family: 'MyFont';
+    src: url('./monster.ttf');
+    font-style: normal;
+  }
+#main{
+    padding: 1rem;
+}
+
+body{
+ /* background: url(./wall.jpg);  */
+background-size: cover;
+font-family: 'MyFont';
+}
+
+.infoDiv{   
+    position: relative;
+    display: grid;
+    border-radius: 10px;
+    grid-template-columns: 1fr 1fr;
+    /* box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset; */
+}
+
+.projects{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.tasks{
+
+}
+
+.addTaskButton{
+    background: url(./add.svg);
+    background-size: cover;
+    background-position: center;
+    height: 2rem;
+    width: 2rem;
+}
+
+.project{
+    padding: 1rem;
+    margin: 2rem;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    -moz-border-radius-bottomleft: 50px;
+border-bottom-left-radius: 50px;
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+}
+
+
+.addButton{
+    background: url(./add.svg);
+    background-size: cover;
+    background-position: center;
+    height: 2rem;
+    width: 2rem;
+}
+
+.projectsHeader{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.tasksHeader{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.task{
+    padding: 1rem;
+    margin: 2rem;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    /* -moz-border-radius-bottomleft: 50px;
+border-bottom-left-radius: 50px; */
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-top-right-radius: 1rem;
+border-bottom-right-radius: 1rem;
+}
+.task > div{
+flex-grow: 1;
+/* font-weight: bolder; */
+}
+.buttons{
+
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.project>button{
+    background: url(./delete.svg);
+    background-size: cover;
+    background-position: contain;
+    border: none;
+}
+
+.buttons > button:first-child{
+    background: url(./delete.svg);
+    background-size: contain;
+    background-position: center;
+    border: none;
+}
+
+.buttons > button:last-child{
+    background: url(./edit.svg);
+    background-size: contain;
+    background-position: center;
+    border: none;
+}
+
+button{
+    padding: 1rem;
+}
+
+.todoForms{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    position: absolute;
+    top: 22%;
+    left:39%;
+    border: 1px solid black;
+    border-radius: 1rem;
+}
+
+.innerDiv{
+    display: flex;
+    gap: 4rem;
+}
+
+.innerDiv>label{
+    width: 20%;
+}
+
+.innerDiv>input{
+    flex-grow: 1;
+}
+
+textarea{
+    flex-grow: 1;
+}
+
+.switch{
+    display: none;
+}
