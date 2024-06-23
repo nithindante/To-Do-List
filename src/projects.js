@@ -27,7 +27,8 @@ let projects = class{
 
         let toDo = new toDoList;
         toDo.createTasksDiv()
-        toDo.newTask()
+        toDo.createNewTask()
+        
     }
 
 

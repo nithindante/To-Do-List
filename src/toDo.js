@@ -1,12 +1,13 @@
 import {createForm,inputDetails} from './task'
 import {toggleClasses} from './dom'
 let toDoList = class {
-    constructor(title,description,dueDate,priority)
+    constructor(title,description,dueDate,priority,checked)
     {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.checked = checked;
         this.tasksDiv = document.querySelector('.tasks')
     }
 
@@ -28,12 +29,41 @@ let toDoList = class {
         // this.tasksDiv.appendChild(taskDiv)
     }
 
-createDiv() {
+createDiv(newTask={}) {
         let taskDiv = document.createElement('div')
         taskDiv.classList.add('task')
+
+        let displayedText = document.createElement('div')
+        displayedText.classList.add('displayedText')
+        let displayedTextHeader = document.createElement('div')
+        displayedTextHeader.classList.add('displayedTextHeader')
         let name = document.createElement('div')
-        taskDiv.appendChild(name)
-        taskDiv.appendChild(this.createButtons())
+        name.textContent=newTask.title
+        
+        let dueDate = document.createElement('div')
+        dueDate.textContent = newTask.dueDate
+
+        let priority = document.createElement('div')
+        priority.textContent=newTask.priority
+        // let description = document.createElement('div')
+        // description.textContent = newTask.description
+
+        let checked = document.createElement('input')
+        checked.setAttribute('type','checkbox')
+        if(newTask.checked)
+            {
+                checked.checked = true
+            }
+        displayedTextHeader.appendChild(name)
+        displayedTextHeader.appendChild(dueDate)
+        displayedTextHeader.appendChild(priority)
+
+        displayedText.appendChild(displayedTextHeader)
+        // displayedText.appendChild(description)
+        taskDiv.appendChild(displayedText)
+        let buttons = this.createButtons()
+        buttons.appendChild(checked)
+        taskDiv.appendChild(buttons)
         return taskDiv
     }
 
@@ -51,22 +81,26 @@ createDiv() {
     editClick() {
         let editButton = document.querySelector('.edit')
         editButton.addEventListener('click',function () {
-            createForm();
-            toggleClasses();
-            
+            // createForm();
+            // toggleClasses();
+            console.log('andi')
             event.preventDefault();
         })};
 
-    newTask(){
+    createNewTask(){
         let addTaskButton = document.querySelector('.addTaskButton')
         addTaskButton.addEventListener('click',function () {
             createForm();
             toggleClasses();
             inputDetails();
+             // editClick();
             event.preventDefault();
+            
         })}
 
+    inputDetails(){
 
+    }
 }
 
 

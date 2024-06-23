@@ -20,11 +20,41 @@ let createForm = function(){
     let dueDate = document.createElement('input')
     dueDate.setAttribute('id','dueDate')
     dueDate.required=true;
+
+
     let priorityLabel = document.createElement('label')
     priorityLabel.setAttribute('for','priority')
     priorityLabel.textContent='Priority'
-    let priority = document.createElement('input')
-    priority.setAttribute('id','priority')
+
+    let priorityLowDiv = document.createElement('label')
+    priorityLowDiv.classList.add('container')
+    let priorityMidDiv = document.createElement('label')
+    let priorityHighDiv = document.createElement('label')
+
+    priorityLowDiv.innerHTML='1'
+
+    let priorityLow = document.createElement('input')
+    priorityLow.setAttribute('id','priorityLow')
+    priorityLow.setAttribute('type','radio')
+    priorityLow.setAttribute('name','priority')
+    priorityMidDiv.textContent='2'
+    priorityHighDiv.textContent='3'
+    priorityMidDiv.classList.add('container')
+    priorityHighDiv.classList.add('container')
+
+
+    let priorityMid = document.createElement('input')
+    priorityMid.setAttribute('id','priorityMid')
+    priorityMid.setAttribute('type','radio')
+    priorityMid.setAttribute('name','priority')
+
+
+
+    let priorityHigh = document.createElement('input')
+    priorityHigh.setAttribute('id','priorityMid')
+    priorityHigh.setAttribute('type','radio')
+    priorityHigh.setAttribute('name','priority')
+
 
     let infoDiv = document.querySelector('.infoDiv')
 
@@ -36,6 +66,14 @@ let createForm = function(){
     dueDateDiv.classList.add('innerDiv')
 
     infoDiv.appendChild(todoForm)
+    priorityLowDiv.appendChild(priorityLow)
+
+    
+    priorityMidDiv.appendChild(priorityMid)
+
+    
+    priorityHighDiv.appendChild(priorityHigh)
+
 
     let priorityDiv = document.createElement('div')
     priorityDiv.classList.add('innerDiv')
@@ -54,15 +92,23 @@ let createForm = function(){
     todoForm.appendChild(formHeader)
     titleDiv.appendChild(titleLabel)
     titleDiv.appendChild(title)
-     todoForm.appendChild(titleDiv)
-
+    todoForm.appendChild(titleDiv)
     dueDateDiv.appendChild(dueDateLabel)
     dueDateDiv.appendChild(dueDate)
     todoForm.appendChild(dueDateDiv)
-    priorityDiv.appendChild(priorityLabel)
-    priorityDiv.appendChild(priority)
+
+   
+
+  
     todoForm.appendChild(priorityDiv)
 
+
+    let innerPriorityDiv = document.createElement('div')
+    priorityDiv.appendChild(priorityLabel)
+    priorityDiv.appendChild(innerPriorityDiv)
+    innerPriorityDiv.appendChild(priorityLowDiv)
+    innerPriorityDiv.appendChild(priorityMidDiv)
+    innerPriorityDiv.appendChild(priorityHighDiv)
     descriptionDiv.appendChild(descriptionLabel)
     descriptionDiv.appendChild(description)
     todoForm.appendChild(descriptionDiv)
@@ -81,6 +127,7 @@ let createForm = function(){
     checkedLabel.setAttribute('for','checkbox')
     checkedLabel.textContent='Finished'
     let checkedDiv = document.createElement('div')
+    checkedDiv.classList.add('checkedDiv')
     checkedDiv.appendChild(checked)
     checkedDiv.appendChild(checkedLabel)
     buttonDiv.appendChild(newTaskButton)
@@ -94,22 +141,18 @@ let inputDetails = function(){
     let dueDateInput = document.querySelector('#dueDate')
     let priorityInput = document.querySelector('#priority')
     let descriptionInput = document.querySelector('#description')
+    let checkedInput = document.querySelector('#checkbox')
     forms.addEventListener('submit',function(){
-        let newTask = new toDoList(titleInput.value,dueDateInput.value,priorityInput.value,descriptionInput.value)
+        let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value,'nil',checkedInput.checked)
+        forms.remove()
         toggleClasses();
-        forms.classList.toggle('switch')
         enterDetails(newTask);
         event.preventDefault();
-        
     })
 }
 
 function enterDetails(newTask){
-    console.log(newTask)
-    let tasks = document.querySelector('.tasks')
-    let toDo = new toDoList;
-    let projectDiv = toDo.createDiv();
-    tasks.appendChild(projectDiv)
+    newTask.tasksDiv.appendChild(newTask.createDiv(newTask))
 }
 function removeClasses() {
     let projects = document.querySelector('.projects')

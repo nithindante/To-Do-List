@@ -28,7 +28,15 @@ let toggleClasses = (function () {
         tasks.classList.toggle('switch')
 })
 
-export {basicLayout,toggleClasses};
+let addClasses = (function () {
+
+        let projects = document.querySelector('.projects')
+        let tasks = document.querySelector('.tasks')
+        projects.classList.add('switch')
+        tasks.classList.add('switch')
+})
+
+export {basicLayout,toggleClasses,addClasses};
 
 
 
