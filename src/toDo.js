@@ -1,4 +1,4 @@
-import {createForm,inputDetails} from './task'
+import {createForm,inputDetails,editForm} from './task'
 import {toggleClasses} from './dom'
 let toDoList = class {
     constructor(title,description,dueDate,priority,checked)
@@ -50,6 +50,7 @@ createDiv(newTask={}) {
 
         let checked = document.createElement('input')
         checked.setAttribute('type','checkbox')
+        checked.setAttribute('id','checkbox')
         if(newTask.checked)
             {
                 checked.checked = true
@@ -59,7 +60,6 @@ createDiv(newTask={}) {
         displayedTextHeader.appendChild(priority)
 
         displayedText.appendChild(displayedTextHeader)
-        // displayedText.appendChild(description)
         taskDiv.appendChild(displayedText)
         let buttons = this.createButtons()
         buttons.appendChild(checked)
@@ -71,6 +71,7 @@ createDiv(newTask={}) {
         let buttonsDiv = document.createElement('div')
         buttonsDiv.classList.add('buttons')
         let deleteButton = document.createElement('button')
+        deleteButton.classList.add('deleteTasks')
         let editButton = document.createElement('button')
         editButton.classList.add('edit')
         buttonsDiv.appendChild(deleteButton)
@@ -78,26 +79,29 @@ createDiv(newTask={}) {
         return buttonsDiv
     }
 
-    editClick() {
-        let editButton = document.querySelector('.edit')
+
+    editClick(div,task) {     
+        let editCheckBox = div.querySelector('#checkbox')                                                               // Clicks the Edit button in each Tasks
+        let editButton = div.querySelector('.edit')
         editButton.addEventListener('click',function () {
-            // createForm();
-            // toggleClasses();
-            console.log('andi')
+            if(editCheckBox.checked === true){
+                task.checked = true
+            }  
+            toggleClasses();
+            editForm(div,task);       
             event.preventDefault();
-        })};
+        })
+    };
 
     createNewTask(){
         let addTaskButton = document.querySelector('.addTaskButton')
-        addTaskButton.addEventListener('click',function () {
+        addTaskButton.addEventListener('click',function () {   
             createForm();
             toggleClasses();
-            inputDetails();
-             // editClick();
+            inputDetails();                         // Clicks the Add button for Tasks
             event.preventDefault();
             
         })}
-
     inputDetails(){
 
     }

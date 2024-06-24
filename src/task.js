@@ -123,6 +123,7 @@ let createForm = function(){
     let checked = document.createElement('input')
     checked.setAttribute('type','checkbox')
     checked.setAttribute('id','checkbox')
+    checked.classList.add('checkedDivInner')
     let checkedLabel = document.createElement('label')
     checkedLabel.setAttribute('for','checkbox')
     checkedLabel.textContent='Finished'
@@ -152,12 +153,61 @@ let inputDetails = function(){
 }
 
 function enterDetails(newTask){
-    newTask.tasksDiv.appendChild(newTask.createDiv(newTask))
+    let newDiv = newTask.createDiv(newTask)
+    newTask.tasksDiv.appendChild(newDiv)
+    deleteTasks(newDiv,newTask)
+    newTask.editClick(newDiv,newTask)
 }
-function removeClasses() {
-    let projects = document.querySelector('.projects')
-        let tasks = document.querySelector('.tasks')
-        projects.classList.toggle('switch')
-        tasks.classList.toggle('switch')
+
+function deleteTasks(newDiv,newTask){
+    let deleteTasks = newDiv.querySelector('.deleteTasks')
+    deleteTasks.addEventListener('click',function () {
+       newTask.tasksDiv.removeChild(newDiv)
+    })
 }
-export{createForm,inputDetails}
+function enterEditDetails(div,newTask){
+    let newDiv = newTask.createDiv(newTask)
+    newTask.tasksDiv.removeChild(div)
+    newTask.tasksDiv.appendChild(newDiv)
+    
+    newTask.editClick(newDiv,newTask)
+}
+// function removeClasses() {
+//     let projects = document.querySelector('.projects')
+//         let tasks = document.querySelector('.tasks')
+//         projects.classList.toggle('switch')
+//         tasks.classList.toggle('switch')
+// }
+
+let editForm = function (div,task) {
+
+    createForm();
+    let forms = document.querySelector('#forms')
+    let titleInput = document.querySelector('#title')
+    let dueDateInput = document.querySelector('#dueDate')
+    let priorityInput = document.querySelector('#priority')
+    let descriptionInput = document.querySelector('#description')
+    let checkedInput = document.querySelector('.checkedDivInner')
+
+    titleInput.defaultValue = task.title;
+    dueDateInput.defaultValue = task.dueDate;
+    // priorityInput.defaultValue = div.priorityInput;
+    
+    descriptionInput.defaultValue = task.description;
+
+    if(task.checked == true)
+        {
+            
+            checkedInput.checked = true
+        }
+
+     forms.addEventListener('submit',function () {
+        let editedTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value,'nil',checkedInput.checked)
+        forms.remove()
+        toggleClasses();
+
+        enterEditDetails(div,editedTask);
+     })   
+}
+
+export{createForm,inputDetails,editForm}
