@@ -1,5 +1,5 @@
 import { toDoList,editClick } from "./toDo";
-
+import {hoverEffect} from './logic.js'
 let projects = class{
     constructor(name)
     {
@@ -23,23 +23,40 @@ let projects = class{
         projectsDiv.appendChild(projectsHeader)
         let projectDiv = this.createDiv();
         projectsDiv.appendChild(projectDiv)
+        // this.hoverEffect(projectDiv);
         let toDo = new toDoList;
         toDo.createTasksDiv()
-        toDo.createNewTask()
+        let newTasksDone  = projectDiv.querySelector('.addTaskButton')
+        newTasksDone.addEventListener('click',function () {
+        toDo.createNewTask(projectDiv)
+        event.preventDefault();
+        })
+       
+        
+        
     }
 
 
-
     newProject(){
-
+        
         let addButton = document.querySelector('.addButton')
         addButton.addEventListener('click',()=>{
+  
             let div = this.createDiv();
             let projectsDiv = document.querySelector('.projects')
+            console.log(div)
+            div.querySelector('.addTaskButton').addEventListener('click',function () {
+                let toDo = new toDoList;
+        toDo.createTasksDiv()
+        toDo.createNewTask(div)
+        event.preventDefault();
+
+            })
             projectsDiv.appendChild(div);
             this.deleteProjects(div);
         })
     }
+
 
 
     deleteProjects(div){
@@ -54,11 +71,15 @@ let projects = class{
         let projectDiv = document.createElement('div')
         projectDiv.classList.add('project')
         let name = document.createElement('div')
-        name.textContent='Default Project';
+        name.textContent=this.name;
         let deleteButton = document.createElement('button')
         deleteButton.classList.add('deleteProjects')
+        let addButton = document.createElement('button')
+        addButton.classList.add('addTaskButton')
+
         projectDiv.appendChild(name)
         projectDiv.appendChild(deleteButton)
+        projectDiv.appendChild(addButton)
         return projectDiv
     }
 }

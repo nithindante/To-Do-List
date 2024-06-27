@@ -51,7 +51,7 @@ let createForm = function(){
 
 
     let priorityHigh = document.createElement('input')
-    priorityHigh.setAttribute('id','priorityMid')
+    priorityHigh.setAttribute('id','priorityHigh')
     priorityHigh.setAttribute('type','radio')
     priorityHigh.setAttribute('name','priority')
 
@@ -140,11 +140,28 @@ let inputDetails = function(){
     let forms = document.querySelector('#forms')
     let titleInput = document.querySelector('#title')
     let dueDateInput = document.querySelector('#dueDate')
+
+
     let priorityInput = document.querySelector('#priority')
+
+
     let descriptionInput = document.querySelector('#description')
     let checkedInput = document.querySelector('#checkbox')
+    
     forms.addEventListener('submit',function(){
-        let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value,'nil',checkedInput.checked)
+        if(document.querySelector('#priorityLow').checked===true)
+            {
+                 priorityInput = 1
+            }
+        else if(document.querySelector('#priorityMid').checked===true)
+            {
+                priorityInput = 2
+            }
+        else if(document.querySelector('#priorityHigh').checked===true)
+            {
+                priorityInput = 3
+            }
+        let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
         forms.remove()
         toggleClasses();
         enterDetails(newTask);
@@ -172,42 +189,57 @@ function enterEditDetails(div,newTask){
     
     newTask.editClick(newDiv,newTask)
 }
-// function removeClasses() {
-//     let projects = document.querySelector('.projects')
-//         let tasks = document.querySelector('.tasks')
-//         projects.classList.toggle('switch')
-//         tasks.classList.toggle('switch')
-// }
+
 
 let editForm = function (div,task) {
-
     createForm();
     let forms = document.querySelector('#forms')
     let titleInput = document.querySelector('#title')
     let dueDateInput = document.querySelector('#dueDate')
-    let priorityInput = document.querySelector('#priority')
+    let priorityLow = document.querySelector('#priorityLow')
+    let priorityMid = document.querySelector('#priorityMid')
+    let priorityHigh = document.querySelector('#priorityHigh')
+    let priority;
     let descriptionInput = document.querySelector('#description')
     let checkedInput = document.querySelector('.checkedDivInner')
-
     titleInput.defaultValue = task.title;
     dueDateInput.defaultValue = task.dueDate;
-    // priorityInput.defaultValue = div.priorityInput;
-    
-    descriptionInput.defaultValue = task.description;
-
-    if(task.checked == true)
+    if (task.priority === 1)
+    {
+        
+        priorityLow.checked = true
+    }
+    else if (task.priority === 2)
         {
             
+            priorityMid.checked = true
+        }
+    else if (task.priority === 3)
+        {
+           
+            priorityHigh.checked = true
+        }
+    descriptionInput.defaultValue = task.description;
+    if(task.checked == true)
+        {
             checkedInput.checked = true
         }
-
-     forms.addEventListener('submit',function () {
-        let editedTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value,'nil',checkedInput.checked)
+        forms.addEventListener('submit',function () {
+        if (priorityLow.checked == true)
+            {
+                priority =1 
+            }    
+            else if (priorityMid.checked == true){
+                priority =2 
+            }
+        else if(priorityHigh.checked == true){
+            priority = 3
+        }
+        let editedTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value,priority,checkedInput.checked)
         forms.remove()
         toggleClasses();
-
         enterEditDetails(div,editedTask);
-     })   
+    })   
 }
 
 export{createForm,inputDetails,editForm}

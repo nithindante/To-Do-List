@@ -1,5 +1,6 @@
 import { toDoList } from "./toDo.js";
 import { projects } from "./projects.js";
+import {hoverEffect} from './logic.js'
 let mainDiv = document.querySelector('#main')
 
 let basicLayout = (function () {
@@ -15,9 +16,11 @@ let basicLayout = (function () {
     tasksDiv.classList.add('tasks')
     infoDiv.appendChild(tasksDiv)
     mainDiv.appendChild(infoDiv)
-    let project = new projects();
+    let project = new projects('Default Template');
+    console.log(project)
     project.createMainDiv()
     project.newProject()
+    
 })();
 
 let toggleClasses = (function () {

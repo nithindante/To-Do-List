@@ -18,11 +18,11 @@ let toDoList = class {
         let tasksHeading = document.createElement('h3')
         tasksHeading.textContent='Tasks'
 
-        let addButton = document.createElement('button')
-        addButton.classList.add('addTaskButton')
+        // let addButton = document.createElement('button')
+        // addButton.classList.add('addTaskButton')
 
         tasksHeader.appendChild(tasksHeading)
-        tasksHeader.appendChild(addButton)
+        // tasksHeader.appendChild(addButton)
         this.tasksDiv.appendChild(tasksHeader)
         
         // let taskDiv = this.createDiv();
@@ -30,6 +30,7 @@ let toDoList = class {
     }
 
 createDiv(newTask={}) {
+
         let taskDiv = document.createElement('div')
         taskDiv.classList.add('task')
 
@@ -45,9 +46,7 @@ createDiv(newTask={}) {
 
         let priority = document.createElement('div')
         priority.textContent=newTask.priority
-        // let description = document.createElement('div')
-        // description.textContent = newTask.description
-
+        priority.classList.add('priority')
         let checked = document.createElement('input')
         checked.setAttribute('type','checkbox')
         checked.setAttribute('id','checkbox')
@@ -81,27 +80,50 @@ createDiv(newTask={}) {
 
 
     editClick(div,task) {     
-        let editCheckBox = div.querySelector('#checkbox')                                                               // Clicks the Edit button in each Tasks
+        let editCheckBox = div.querySelector('#checkbox')           
+        let priority = document.querySelector('.priority')  
+        let priorityLow = document.querySelector('#priorityLow')
+        let priorityMid = document.querySelector('#priorityMid')
+        let priorityHigh = document.querySelector('#priorityHigh')                                                                                                                        // Clicks the Edit button in each Tasks
         let editButton = div.querySelector('.edit')
         editButton.addEventListener('click',function () {
+
             if(editCheckBox.checked === true){
                 task.checked = true
             }  
+
+            if (priority.textContent == 1)
+                {
+
+                    task.priority = 1
+                }
+                else if (priority.textContent == 2)
+                    {
+
+                        task.priority = 2
+                    }
+                else if (priority.textContent== 3)
+                    {
+     
+                        task.priority = 3
+                    }
             toggleClasses();
             editForm(div,task);       
             event.preventDefault();
         })
     };
 
-    createNewTask(){
-        let addTaskButton = document.querySelector('.addTaskButton')
-        addTaskButton.addEventListener('click',function () {   
+    createNewTask(projectDiv){
+        // let addTaskButton = newTasksDone.querySelector('.addTaskButton')
+        // addTaskButton.addEventListener('click',function () {   
+        //     console.log('vali')
             createForm();
             toggleClasses();
             inputDetails();                         // Clicks the Add button for Tasks
-            event.preventDefault();
+            // event.preventDefault();
             
-        })}
+        // })}
+    }
     inputDetails(){
 
     }
