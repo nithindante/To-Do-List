@@ -119,7 +119,7 @@ createDiv(newTask={}) {
         //     console.log('vali')
             createForm();
             toggleClasses();
-            inputDetails();                         // Clicks the Add button for Tasks
+            inputDetails(projectDiv);                         // Clicks the Add button for Tasks
             // event.preventDefault();
             
         // })}

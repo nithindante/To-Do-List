@@ -136,7 +136,7 @@ let createForm = function(){
     todoForm.appendChild(buttonDiv)
 };
 
-let inputDetails = function(){
+let inputDetails = function(projectDiv){
     let forms = document.querySelector('#forms')
     let titleInput = document.querySelector('#title')
     let dueDateInput = document.querySelector('#dueDate')
@@ -162,6 +162,7 @@ let inputDetails = function(){
                 priorityInput = 3
             }
         let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
+        projectDiv.arr.push(newTask)
         forms.remove()
         toggleClasses();
         enterDetails(newTask);

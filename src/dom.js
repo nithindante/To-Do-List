@@ -2,8 +2,15 @@ import { toDoList } from "./toDo.js";
 import { projects } from "./projects.js";
 import {hoverEffect} from './logic.js'
 let mainDiv = document.querySelector('#main')
+let newArr = []
+let touchAnimation = function (newArr) {
+        for (let i = 0; i < newArr.length; i++) {
+                console.log(newArr[i])
+        }
 
+};
 let basicLayout = (function () {
+   
     let toDoHeader = document.createElement('h2')
     toDoHeader.textContent="To-Do-List";
     mainDiv.appendChild(toDoHeader)
@@ -16,13 +23,46 @@ let basicLayout = (function () {
     tasksDiv.classList.add('tasks')
     infoDiv.appendChild(tasksDiv)
     mainDiv.appendChild(infoDiv)
-    let project = new projects('Default Template');
-    console.log(project)
-    project.createMainDiv()
-    project.newProject()
     
+//     let addButton = document.querySelector('.addButton')
+//         addButton.addEventListener('click',()=>{
+//                 let project = new projects('Default Template');
+//                 // project.createMainDiv()
+//         });
+//     project.newProject()
+
 })();
 
+let createMainDiv = (function () {
+        let projectsDiv = document.querySelector('.projects')       
+
+        let projectsHeader = document.createElement('div')
+        projectsHeader.classList.add('projectsHeader')
+
+        let projectsHeading = document.createElement('h3')
+        projectsHeading.textContent='Projects'
+
+        let addButton = document.createElement('button')
+        addButton.classList.add('addButton')
+
+        projectsHeader.appendChild(projectsHeading)
+        projectsHeader.appendChild(addButton)
+        projectsDiv.appendChild(projectsHeader)
+        // let projectDiv = this.createDiv();
+        // projectsDiv.appendChild(projectDiv)
+        // // this.hoverEffect(projectDiv);
+
+        //  let toDo = new toDoList;
+        // let newTasksDone  = projectDiv.querySelector('.addTaskButton')
+        // newTasksDone.addEventListener('click',function () {
+        //     console.log('kundi  ')
+        // toDo.createNewTask(projectDiv)
+        // event.preventDefault();
+        // })
+       
+        
+        
+    })();
 let toggleClasses = (function () {
 
         let projects = document.querySelector('.projects')
@@ -39,8 +79,35 @@ let addClasses = (function () {
         tasks.classList.add('switch')
 })
 
+let addProjects = (function () {
+                
+                let addButton = document.querySelector('.addButton')
+                addButton.addEventListener('click',()=>{
+                let project = new projects('Default Template');
+                
+                project.newProject()
+                let projectDiv = document.querySelector('.project')
+                newArr.push(projectDiv)
+                // console.log(projectDiv)
 
-export {basicLayout,toggleClasses,addClasses};
+                touchAnimation(newArr);
+                // project.createMainDiv() 
+        });
+})();
+
+let createTasksDiv = (function(){
+        let tasksHeader = document.createElement('div')
+        tasksHeader.classList.add('tasksHeader')
+  
+        let tasksHeading = document.createElement('h3')
+        tasksHeading.textContent='Tasks'
+        tasksHeader.appendChild(tasksHeading)
+        let tasks = document.querySelector('.tasks')
+        tasks.appendChild(tasksHeader)
+    })();
+
+
+export {basicLayout,toggleClasses,addClasses,createMainDiv,addProjects,createTasksDiv,touchAnimation };
 
 
 

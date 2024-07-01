@@ -4,6 +4,7 @@ let projects = class{
     constructor(name)
     {
         this.name = name
+        this.arr = []
     }
 
     createMainDiv(){
@@ -21,16 +22,19 @@ let projects = class{
         projectsHeader.appendChild(projectsHeading)
         projectsHeader.appendChild(addButton)
         projectsDiv.appendChild(projectsHeader)
-        let projectDiv = this.createDiv();
-        projectsDiv.appendChild(projectDiv)
-        // this.hoverEffect(projectDiv);
-        let toDo = new toDoList;
-        toDo.createTasksDiv()
-        let newTasksDone  = projectDiv.querySelector('.addTaskButton')
-        newTasksDone.addEventListener('click',function () {
-        toDo.createNewTask(projectDiv)
-        event.preventDefault();
-        })
+        // let projectDiv = this.createDiv();
+        // projectsDiv.appendChild(projectDiv)
+        // // this.hoverEffect(projectDiv);
+
+         let toDo = new toDoList;
+         toDo.createTasksDiv()
+
+        // let newTasksDone  = projectDiv.querySelector('.addTaskButton')
+        // newTasksDone.addEventListener('click',function () {
+        //     console.log('kundi  ')
+        // toDo.createNewTask(projectDiv)
+        // event.preventDefault();
+        // })
        
         
         
@@ -39,22 +43,23 @@ let projects = class{
 
     newProject(){
         
-        let addButton = document.querySelector('.addButton')
-        addButton.addEventListener('click',()=>{
-  
+        // let addButton = document.querySelector('.addButton')
+        // addButton.addEventListener('click',()=>{
+            // this.arr.push(this)
             let div = this.createDiv();
             let projectsDiv = document.querySelector('.projects')
-            console.log(div)
-            div.querySelector('.addTaskButton').addEventListener('click',function () {
-                let toDo = new toDoList;
-        toDo.createTasksDiv()
-        toDo.createNewTask(div)
-        event.preventDefault();
 
+            div.querySelector('.addTaskButton').addEventListener('click',()=>{
+
+
+                let toDo = new toDoList;
+                toDo.createNewTask(this)
+                event.preventDefault();
+            
             })
             projectsDiv.appendChild(div);
             this.deleteProjects(div);
-        })
+        // })
     }
 
 
