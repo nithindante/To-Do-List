@@ -1,7 +1,8 @@
 import { toggleClasses } from './dom';
 import {toDoList} from './toDo'
+import {projects} from './projects'
 
-let createForm = function(){
+let createForm = function(div){
     let todoForm = document.createElement('form')
     todoForm.classList.add('todoForms')
     todoForm.setAttribute('id','forms')
@@ -136,7 +137,8 @@ let createForm = function(){
     todoForm.appendChild(buttonDiv)
 };
 
-let inputDetails = function(){
+let inputDetails = function(div,sem){
+    console.log(sem)
     let forms = document.querySelector('#forms')
     let titleInput = document.querySelector('#title')
     let dueDateInput = document.querySelector('#dueDate')
@@ -166,6 +168,7 @@ let inputDetails = function(){
         toggleClasses();
         enterDetails(newTask);
         event.preventDefault();
+
     })
 }
 
@@ -242,4 +245,4 @@ let editForm = function (div,task) {
     })   
 }
 
-export{createForm,inputDetails,editForm}
+export{createForm,inputDetails,editForm,deleteTasks}

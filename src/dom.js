@@ -16,11 +16,10 @@ let basicLayout = (function () {
     tasksDiv.classList.add('tasks')
     infoDiv.appendChild(tasksDiv)
     mainDiv.appendChild(infoDiv)
-    let project = new projects('Default Template');
-    console.log(project)
+    let project = new projects('Default');
+
     project.createMainDiv()
     project.newProject()
-    
 })();
 
 let toggleClasses = (function () {

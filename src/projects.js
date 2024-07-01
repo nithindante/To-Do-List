@@ -1,12 +1,17 @@
 import { toDoList,editClick } from "./toDo";
 import {hoverEffect} from './logic.js'
+
 let projects = class{
     constructor(name)
     {
         this.name = name
+        this.arr =[]
     }
 
+
+    
     createMainDiv(){
+ 
         let projectsDiv = document.querySelector('.projects')       
 
         let projectsHeader = document.createElement('div')
@@ -23,12 +28,13 @@ let projects = class{
         projectsDiv.appendChild(projectsHeader)
         let projectDiv = this.createDiv();
         projectsDiv.appendChild(projectDiv)
-        // this.hoverEffect(projectDiv);
-        let toDo = new toDoList;
+        let toDo = new toDoList; 
+        
         toDo.createTasksDiv()
         let newTasksDone  = projectDiv.querySelector('.addTaskButton')
-        newTasksDone.addEventListener('click',function () {
-        toDo.createNewTask(projectDiv)
+        newTasksDone.addEventListener('click',() => {
+        toDo.createNewTask(toDo,this)
+        console.log(this.arr)
         event.preventDefault();
         })
        
@@ -41,15 +47,17 @@ let projects = class{
         
         let addButton = document.querySelector('.addButton')
         addButton.addEventListener('click',()=>{
-  
+            // console.log(this)
+
             let div = this.createDiv();
             let projectsDiv = document.querySelector('.projects')
-            console.log(div)
+            console.log(this)
             div.querySelector('.addTaskButton').addEventListener('click',function () {
                 let toDo = new toDoList;
-        toDo.createTasksDiv()
-        toDo.createNewTask(div)
-        event.preventDefault();
+                (this.arr).push(toDo)
+            toDo.createTasksDiv()
+            toDo.createNewTask(div)
+            event.preventDefault();
 
             })
             projectsDiv.appendChild(div);
@@ -82,6 +90,8 @@ let projects = class{
         projectDiv.appendChild(addButton)
         return projectDiv
     }
+
+
 }
 
 
