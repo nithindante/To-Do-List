@@ -183,7 +183,9 @@ textarea{
     gap: 4rem;
   }
 
-
+.inactiveTask{
+  display: none;
+}
 
 /*
   .container input {

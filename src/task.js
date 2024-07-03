@@ -165,13 +165,15 @@ let inputDetails = function(projectDiv){
         projectDiv.arr.push(newTask)
         forms.remove()
         toggleClasses();
-        enterDetails(newTask);
+        enterDetails(newTask,projectDiv);
         event.preventDefault();
     })
 }
 
-function enterDetails(newTask){
+function enterDetails(newTask,projectDiv){
+  
     let newDiv = newTask.createDiv(newTask)
+    projectDiv.divArr.push(newDiv)
     newTask.tasksDiv.appendChild(newDiv)
     deleteTasks(newDiv,newTask)
     newTask.editClick(newDiv,newTask)

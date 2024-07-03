@@ -1,14 +1,22 @@
 import { toDoList } from "./toDo.js";
 import { projects } from "./projects.js";
-import {hoverEffect} from './logic.js'
+import { hoverEffect,projectsArr,touchEffect} from "./logic.js";
 let mainDiv = document.querySelector('#main')
 let newArr = []
-let touchAnimation = function (newArr) {
-        for (let i = 0; i < newArr.length; i++) {
-                console.log(newArr[i])
-        }
+let projectsNewArr = []
 
-};
+// let touchAnimation = function () {
+// let project = document.querySelectorAll('.project')
+// for (let i = 0; i < project.length; i++) 
+//         {
+//         project[i].addEventListener('click', function () {
+//                 console.log('andi')
+//         })
+// }
+
+// };
+
+
 let basicLayout = (function () {
    
     let toDoHeader = document.createElement('h2')
@@ -84,15 +92,15 @@ let addProjects = (function () {
                 let addButton = document.querySelector('.addButton')
                 addButton.addEventListener('click',()=>{
                 let project = new projects('Default Template');
-                
                 project.newProject()
-                let projectDiv = document.querySelector('.project')
-                newArr.push(projectDiv)
-                // console.log(projectDiv)
-
-                touchAnimation(newArr);
-                // project.createMainDiv() 
+                newArr.push(project)
+                hoverEffect();
+                // console.log(projectsArr)
+                // let projectDiv = document.querySelectorAll('.project')
+        
+                // console.log(newArr)        
         });
+
 })();
 
 let createTasksDiv = (function(){
@@ -107,7 +115,8 @@ let createTasksDiv = (function(){
     })();
 
 
-export {basicLayout,toggleClasses,addClasses,createMainDiv,addProjects,createTasksDiv,touchAnimation };
+
+export {basicLayout,toggleClasses,addClasses,createMainDiv,addProjects,createTasksDiv,newArr };
 
 
 

@@ -1,10 +1,13 @@
 import { toDoList,editClick } from "./toDo";
-import {hoverEffect} from './logic.js'
+import { hoverEffect,projectsArr } from "./logic.js";
+
 let projects = class{
+    
     constructor(name)
     {
         this.name = name
         this.arr = []
+        this.divArr = []
     }
 
     createMainDiv(){
@@ -22,19 +25,11 @@ let projects = class{
         projectsHeader.appendChild(projectsHeading)
         projectsHeader.appendChild(addButton)
         projectsDiv.appendChild(projectsHeader)
-        // let projectDiv = this.createDiv();
-        // projectsDiv.appendChild(projectDiv)
-        // // this.hoverEffect(projectDiv);
+
 
          let toDo = new toDoList;
          toDo.createTasksDiv()
 
-        // let newTasksDone  = projectDiv.querySelector('.addTaskButton')
-        // newTasksDone.addEventListener('click',function () {
-        //     console.log('kundi  ')
-        // toDo.createNewTask(projectDiv)
-        // event.preventDefault();
-        // })
        
         
         
@@ -42,27 +37,66 @@ let projects = class{
 
 
     newProject(){
-        
-        // let addButton = document.querySelector('.addButton')
-        // addButton.addEventListener('click',()=>{
-            // this.arr.push(this)
             let div = this.createDiv();
+            projectsArr.push(div)
             let projectsDiv = document.querySelector('.projects')
 
             div.querySelector('.addTaskButton').addEventListener('click',()=>{
-
-
                 let toDo = new toDoList;
                 toDo.createNewTask(this)
                 event.preventDefault();
-            
             })
+
+            this.touch(div)
             projectsDiv.appendChild(div);
             this.deleteProjects(div);
-        // })
     }
 
+    touch(div){
+        div.addEventListener('click', () =>{
+            let tasks = this.divArr
+            if (tasks.length==0)
+                {
+                  let newTasks =  document.querySelectorAll('.task')
+                  for (let i = 0; i < newTasks.length; i++) {
+                    newTasks[i].classList.add('switch')
+                 }
+                }
+            this.addSwitch();
+            for (let i = 0; i < tasks.length; i++) 
+            {
+                tasks[i].classList.remove('switch')
+            }
+            
+        })
+    }
 
+    addSwitch(){
+        if (!document.querySelectorAll('.task'))
+            {
+                return
+            }
+        else{
+            
+                let newTasks =  document.querySelectorAll('.task')
+                for (let i = 0; i < newTasks.length; i++) {
+                    if (newTasks[i]) {
+                        newTasks[i].classList.add('switch')
+                    }
+                }
+
+        }
+            // let newtasks = document.querySelectorAll('.tasks')
+            // console.log(newTasks)
+
+            //         for (let i = 0; i < newTasks.length; i++) {
+                    
+            //         if (newTasks[i]) {
+            //             newTasks[i].classList.add('switch')
+            //         }
+            //     }
+
+    }
 
     deleteProjects(div){
         let projectsDiv = document.querySelector('.projects')       
@@ -72,7 +106,7 @@ let projects = class{
         })
     }
 
-    createDiv = ()=> {
+    createDiv = (newArr)=> {
         let projectDiv = document.createElement('div')
         projectDiv.classList.add('project')
         let name = document.createElement('div')

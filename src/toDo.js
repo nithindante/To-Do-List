@@ -33,7 +33,7 @@ createDiv(newTask={}) {
 
         let taskDiv = document.createElement('div')
         taskDiv.classList.add('task')
-
+        
         let displayedText = document.createElement('div')
         displayedText.classList.add('displayedText')
         let displayedTextHeader = document.createElement('div')
