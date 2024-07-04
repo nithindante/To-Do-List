@@ -32,7 +32,6 @@ let projects = class{
                     localProjectsArr.push(this)
                     localStorage.setItem("Projects", JSON.stringify(localProjectsArr));
                     userData = JSON.parse(localStorage.getItem('Projects'))
-                    console.log(localStorage)
     }
 
     addtoMultiple()
@@ -41,14 +40,6 @@ let projects = class{
         localProjectsArr.push(this)
         localStorage.setItem("Projects", JSON.stringify(localProjectsArr));
         userData = JSON.parse(localStorage.getItem('Projects'))
-        console.log(userData)
-        // userData = JSON.parse(localStorage.getItem('Projects'))
-        // console.log(userData)
-
-
-        // localStorage.setItem("Projects", JSON.stringify(localProjectsArr));
-        // userData = JSON.parse(localStorage.getItem('Projects'))
-        // console.log(localStorage)
     }
     newProject(){
             let  j = 0
@@ -78,32 +69,26 @@ let projects = class{
             }
             else if(projectsArr2.length>1)
             {
+                let count = 0
                 for (let i = 0; i < projectsArr2.length; i++) 
                 {
+                   
                     let input = projectsArr2[i].querySelector('input')
                     
                     projectsArr2[i].addEventListener('submit',()=>{
+                        console.log('andi')
                         this.name = input.value;
+                        if(count==0)
+                        {
                         this.addtoMultiple()
-
-
-                        // if(j==0)
-                        //     {
-                        //             this.addtoMultiple()
-                        //     }
-                        // else if(j>0){
-                        //     this.addtoMultiple()
-                            
-                        // }
-                    // let input = projectsArr2[i].querySelector('input')
-                    // this.name = input.value;
+                        }
+                        count++
                     let toDo = new toDoList;
-                    toDo.createNewTask(this)
+                    toDo.createNewTask(this,j)
                     event.preventDefault();
-                    })
-
-                    
+                    }) 
                 }
+                j++;
             }
             this.touch(div)
             
