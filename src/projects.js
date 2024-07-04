@@ -80,12 +80,13 @@ let projects = class{
             {
                 for (let i = 0; i < projectsArr2.length; i++) 
                 {
-
                     let input = projectsArr2[i].querySelector('input')
                     
                     projectsArr2[i].addEventListener('submit',()=>{
                         this.name = input.value;
                         this.addtoMultiple()
+
+
                         // if(j==0)
                         //     {
                         //             this.addtoMultiple()
