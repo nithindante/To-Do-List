@@ -139,7 +139,7 @@ let createForm = function(){
     todoForm.appendChild(buttonDiv)
 };
 
-let inputDetails = function(projectDiv){
+let inputDetails = function(projectDiv,j){
     
     let forms = document.querySelector('#forms')
     let titleInput = document.querySelector('#title')
@@ -152,7 +152,8 @@ let inputDetails = function(projectDiv){
     let descriptionInput = document.querySelector('#description')
     let checkedInput = document.querySelector('#checkbox')
 
-    forms.addEventListener('submit',function(){
+    forms.addEventListener('submit',()=>{
+        console.log('kundi')
         if(document.querySelector('#priorityLow').checked===true)
             {
                  priorityInput = 1
@@ -166,16 +167,16 @@ let inputDetails = function(projectDiv){
                 priorityInput = 3
             }
         let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
-
-        // userData[0].arr.push(newTask)
         
+        userData[j].arr.push(newTask)
+
+
+        console.log(userData)
         projectDiv.arr.push(newTask)
         
         // (userData[0].arr).push(newTask)
         
-        // console.log(newTask)
-        // userData[0].arr.push(newTask)
-        // console.log(userData)
+
         forms.remove()
         toggleClasses();
         enterDetails(newTask,projectDiv);

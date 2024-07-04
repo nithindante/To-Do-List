@@ -70,10 +70,7 @@ createDiv(newTask={}) {
 
     editClick(div,task) {     
         let editCheckBox = div.querySelector('#checkbox')           
-        let priority = document.querySelector('.priority')  
-        // let priorityLow = document.querySelector('#priorityLow')
-        // let priorityMid = document.querySelector('#priorityMid')
-        // let priorityHigh = document.querySelector('#priorityHigh')                                                                                                                        // Clicks the Edit button in each Tasks
+        let priority = document.querySelector('.priority')                                                                                                                          // Clicks the Edit button in each Tasks
         let editButton = div.querySelector('.edit')
         editButton.addEventListener('click',function () {
 
@@ -102,11 +99,11 @@ createDiv(newTask={}) {
         })
     };
 
-    createNewTask(projectDiv){
+    createNewTask(projectDiv,j=0){
 
             createForm();
             toggleClasses();
-            inputDetails(projectDiv);                         // Clicks the Add button for Tasks
+            inputDetails(projectDiv,j);                         // Clicks the Add button for Tasks
     }
 
 }
