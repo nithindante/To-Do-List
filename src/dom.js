@@ -3,22 +3,8 @@ import { projects } from "./projects.js";
 import { hoverEffect,projectsArr,touchEffect} from "./logic.js";
 let mainDiv = document.querySelector('#main')
 let newArr = []
-let projectsNewArr = []
-
-// let touchAnimation = function () {
-// let project = document.querySelectorAll('.project')
-// for (let i = 0; i < project.length; i++) 
-//         {
-//         project[i].addEventListener('click', function () {
-//                 console.log('andi')
-//         })
-// }
-
-// };
-
-
+let localProjectsArr = []
 let basicLayout = (function () {
-   
     let toDoHeader = document.createElement('h2')
     toDoHeader.textContent="To-Do-List";
     mainDiv.appendChild(toDoHeader)
@@ -67,10 +53,9 @@ let createMainDiv = (function () {
         // toDo.createNewTask(projectDiv)
         // event.preventDefault();
         // })
-       
         
         
-    })();
+})();
 let toggleClasses = (function () {
 
         let projects = document.querySelector('.projects')
@@ -91,14 +76,11 @@ let addProjects = (function () {
                 
                 let addButton = document.querySelector('.addButton')
                 addButton.addEventListener('click',()=>{
-                let project = new projects('Default Template');
+                        
+                let project = new projects();
                 project.newProject()
                 newArr.push(project)
-                hoverEffect();
-                // console.log(projectsArr)
-                // let projectDiv = document.querySelectorAll('.project')
-        
-                // console.log(newArr)        
+                hoverEffect();      
         });
 
 })();

@@ -8,5 +8,6 @@ basicLayout;
 createMainDiv ;
 addProjects;
 createTasksDiv;
+
 // touchAnimation();
 // hoverEffect();

@@ -1,5 +1,7 @@
 import { toggleClasses } from './dom';
 import {toDoList} from './toDo'
+import { userData } from './projects';
+
 
 let createForm = function(){
     let todoForm = document.createElement('form')
@@ -18,6 +20,7 @@ let createForm = function(){
     dueDateLabel.setAttribute('for','dueDate')
     dueDateLabel.textContent = 'DueDate'
     let dueDate = document.createElement('input')
+    dueDate.setAttribute('type','date')
     dueDate.setAttribute('id','dueDate')
     dueDate.required=true;
 
@@ -137,6 +140,7 @@ let createForm = function(){
 };
 
 let inputDetails = function(projectDiv){
+    
     let forms = document.querySelector('#forms')
     let titleInput = document.querySelector('#title')
     let dueDateInput = document.querySelector('#dueDate')
@@ -147,7 +151,7 @@ let inputDetails = function(projectDiv){
 
     let descriptionInput = document.querySelector('#description')
     let checkedInput = document.querySelector('#checkbox')
-    
+
     forms.addEventListener('submit',function(){
         if(document.querySelector('#priorityLow').checked===true)
             {
@@ -162,10 +166,20 @@ let inputDetails = function(projectDiv){
                 priorityInput = 3
             }
         let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
+
+        // userData[0].arr.push(newTask)
+        
         projectDiv.arr.push(newTask)
+        
+        // (userData[0].arr).push(newTask)
+        
+        // console.log(newTask)
+        // userData[0].arr.push(newTask)
+        // console.log(userData)
         forms.remove()
         toggleClasses();
         enterDetails(newTask,projectDiv);
+
         event.preventDefault();
     })
 }
@@ -228,6 +242,7 @@ let editForm = function (div,task) {
             checkedInput.checked = true
         }
         forms.addEventListener('submit',function () {
+            
         if (priorityLow.checked == true)
             {
                 priority =1 

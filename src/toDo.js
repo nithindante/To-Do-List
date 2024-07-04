@@ -14,19 +14,10 @@ let toDoList = class {
     createTasksDiv(){
         let tasksHeader = document.createElement('div')
         tasksHeader.classList.add('tasksHeader')
-
         let tasksHeading = document.createElement('h3')
         tasksHeading.textContent='Tasks'
-
-        // let addButton = document.createElement('button')
-        // addButton.classList.add('addTaskButton')
-
         tasksHeader.appendChild(tasksHeading)
-        // tasksHeader.appendChild(addButton)
         this.tasksDiv.appendChild(tasksHeader)
-        
-        // let taskDiv = this.createDiv();
-        // this.tasksDiv.appendChild(taskDiv)
     }
 
 createDiv(newTask={}) {
@@ -40,10 +31,8 @@ createDiv(newTask={}) {
         displayedTextHeader.classList.add('displayedTextHeader')
         let name = document.createElement('div')
         name.textContent=newTask.title
-        
         let dueDate = document.createElement('div')
         dueDate.textContent = newTask.dueDate
-
         let priority = document.createElement('div')
         priority.textContent=newTask.priority
         priority.classList.add('priority')
@@ -82,9 +71,9 @@ createDiv(newTask={}) {
     editClick(div,task) {     
         let editCheckBox = div.querySelector('#checkbox')           
         let priority = document.querySelector('.priority')  
-        let priorityLow = document.querySelector('#priorityLow')
-        let priorityMid = document.querySelector('#priorityMid')
-        let priorityHigh = document.querySelector('#priorityHigh')                                                                                                                        // Clicks the Edit button in each Tasks
+        // let priorityLow = document.querySelector('#priorityLow')
+        // let priorityMid = document.querySelector('#priorityMid')
+        // let priorityHigh = document.querySelector('#priorityHigh')                                                                                                                        // Clicks the Edit button in each Tasks
         let editButton = div.querySelector('.edit')
         editButton.addEventListener('click',function () {
 
@@ -114,19 +103,12 @@ createDiv(newTask={}) {
     };
 
     createNewTask(projectDiv){
-        // let addTaskButton = newTasksDone.querySelector('.addTaskButton')
-        // addTaskButton.addEventListener('click',function () {   
-        //     console.log('vali')
+
             createForm();
             toggleClasses();
             inputDetails(projectDiv);                         // Clicks the Add button for Tasks
-            // event.preventDefault();
-            
-        // })}
     }
-    inputDetails(){
 
-    }
 }
 
 
