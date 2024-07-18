@@ -8,6 +8,7 @@ let projectsArr = []
 let hoverEffect = function () {
     let addButton = document.querySelector('.addButton')
     addButton.addEventListener('click',function () {
+
         tasksAdd();
     })
 };

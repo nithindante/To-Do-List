@@ -4,6 +4,8 @@ import { hoverEffect,projectsArr,touchEffect} from "./logic.js";
 let mainDiv = document.querySelector('#main')
 let newArr = []
 let localProjectsArr = []
+
+
 let basicLayout = (function () {
     let toDoHeader = document.createElement('h2')
     toDoHeader.textContent="To-Do-List";
@@ -17,15 +19,7 @@ let basicLayout = (function () {
     tasksDiv.classList.add('tasks')
     infoDiv.appendChild(tasksDiv)
     mainDiv.appendChild(infoDiv)
-    
-//     let addButton = document.querySelector('.addButton')
-//         addButton.addEventListener('click',()=>{
-//                 let project = new projects('Default Template');
-//                 // project.createMainDiv()
-//         });
-//     project.newProject()
-
-})();
+});
 
 let createMainDiv = (function () {
         let projectsDiv = document.querySelector('.projects')       
@@ -42,20 +36,9 @@ let createMainDiv = (function () {
         projectsHeader.appendChild(projectsHeading)
         projectsHeader.appendChild(addButton)
         projectsDiv.appendChild(projectsHeader)
-        // let projectDiv = this.createDiv();
-        // projectsDiv.appendChild(projectDiv)
-        // // this.hoverEffect(projectDiv);
-
-        //  let toDo = new toDoList;
-        // let newTasksDone  = projectDiv.querySelector('.addTaskButton')
-        // newTasksDone.addEventListener('click',function () {
-        //     console.log('kundi  ')
-        // toDo.createNewTask(projectDiv)
-        // event.preventDefault();
-        // })
         
         
-})();
+});
 let toggleClasses = (function () {
 
         let projects = document.querySelector('.projects')
@@ -76,14 +59,13 @@ let addProjects = (function () {
                 
                 let addButton = document.querySelector('.addButton')
                 addButton.addEventListener('click',()=>{
-                        
                 let project = new projects();
                 project.newProject()
                 newArr.push(project)
                 hoverEffect();      
         });
 
-})();
+});
 
 let createTasksDiv = (function(){
         let tasksHeader = document.createElement('div')
@@ -94,7 +76,7 @@ let createTasksDiv = (function(){
         tasksHeader.appendChild(tasksHeading)
         let tasks = document.querySelector('.tasks')
         tasks.appendChild(tasksHeader)
-    })();
+    });
 
 
 

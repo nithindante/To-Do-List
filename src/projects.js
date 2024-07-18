@@ -1,8 +1,11 @@
 import { toDoList,editClick } from "./toDo";
 import { hoverEffect,projectsArr } from "./logic.js";
+import {deleteTasks,enterDetails} from "./task.js"
+import { toggleClasses } from "./dom.js";
 
 let localProjectsArr = []
 let userData
+let times = 0 
 let projects = class{
     
     constructor(name)
@@ -28,85 +31,186 @@ let projects = class{
     }
 
     addToLocal(){
-            
+                    console.log(this)
                     localProjectsArr.push(this)
                     localStorage.setItem("Projects", JSON.stringify(localProjectsArr));
                     userData = JSON.parse(localStorage.getItem('Projects'))
     }
 
-    addtoMultiple()
+    addtoMultiple(x)
     {
+        if(x>0)
+        {
+            return
+        }
         localStorage.clear()
-        localProjectsArr.push(this)
-        localStorage.setItem("Projects", JSON.stringify(localProjectsArr));
-        userData = JSON.parse(localStorage.getItem('Projects'))
+        this.addToLocal()
     }
     newProject(){
-            let  j = 0
+            let  x = 0
             let div = this.createDiv();
             projectsArr.push(div)
-            
             let projectsDiv = document.querySelector('.projects')
             projectsDiv.appendChild(div);
             this.deleteProjects(div);
             let projectsArr2 = document.querySelectorAll('.project')
-            if (projectsArr2.length==1) 
+            for (let i = 0; i < projectsArr2.length; i++) 
             {
-                let input = projectsArr2[0].querySelector('input')     
-                projectsArr2[0].addEventListener('submit', ()=> {
-                    this.name = input.value;
+               
+                let input = projectsArr2[i].querySelector('input')     
+                projectsArr2[i].addEventListener('submit', ()=> {
                     
-                     if (j==0) 
-                     {
-                        this.addToLocal()
-                     }
-                     
+                   
+                    this.name = input.value;
                     let toDo = new toDoList;
-                    toDo.createNewTask(this)
+                    this.addtoMultiple(x)
+                    toDo.createNewTask(this,i)
+                    x++;
                     event.preventDefault();
-                    j++;
+                    
                 })
             }
-            else if(projectsArr2.length>1)
-            {
-                let count = 0
-                for (let i = 0; i < projectsArr2.length; i++) 
-                {
-                   
-                    let input = projectsArr2[i].querySelector('input')
-                    
-                    projectsArr2[i].addEventListener('submit',()=>{
-                        console.log('andi')
-                        this.name = input.value;
-                        if(count==0)
-                        {
-                        this.addtoMultiple()
-                        }
-                        count++
+            this.touch(div); 
+    }
+    getProjects(userLocal,a){
+            let i = 0
+            let div = this.createDiv();
+            projectsArr.push(div)
+            let input = div.querySelector('input')
+            input.value = userLocal.name
+            let projectsDiv = document.querySelector('.projects')
+            projectsDiv.appendChild(div);
+
+            let addNewTasksButton =  div.querySelector('.addTaskButton')
+
+            addNewTasksButton.addEventListener('click',  ()=> {
                     let toDo = new toDoList;
-                    toDo.createNewTask(this,j)
+                    // toDo.createNewTask(this,a)
+                    // this.addToExisting(a)
+                    toDo.createNewTaskDiv(this,a)
+                    
+                    // toDo.createNewTask(this,i)
+                    // x++;
+                    i++;
                     event.preventDefault();
-                    }) 
+
+            })
+            this.deleteProjects(div);
+            this.getTasks(div,userLocal.arr)
+            this.hideTasks()
+            this.switchTasks(div)
+    }
+
+
+    addToExisting()
+    {
+
+
+    }
+    hideTasks()
+    {
+        let tasks = document.querySelectorAll('.task')
+        for (let i = 0; i < tasks.length; i++) {
+            tasks[i].classList.add('switch')
+        }
+
+    }
+
+
+    getTasks(div,tasksArr){
+        let count = 0
+            for (let i = 0; i < tasksArr.length; i++) 
+            {
+                if (count<2) {
+                    this.createTasks(tasksArr[i],times);
                 }
-                j++;
             }
-            this.touch(div)
-            
+
+}
+
+    createTasks(task,times){
+
+
+        let newTask = new toDoList(task.title,task.description,task.dueDate, task.priority,task.checked)
+        this.touchTasks(newTask,times);
+    }
+
+    switchTasks(div,count = 0)
+    {
+
+        div.addEventListener('click', () =>{
+            let tasks = document.querySelectorAll('.task')
+            for (let i = 0; i < tasks.length; i++) {
+            tasks[i].classList.add('switch')
+            }
+
+            for (let i = 0; i < this.divArr.length; i++) 
+            {
+                count ++;
+                this.divArr[i].classList.remove('switch')
+            }
+        })
+
+    }
+
+
+    touchTasks(newTask,times)
+    {
+        
+        let newDiv = newTask.createDiv(newTask)
+        this.divArr.push(newDiv)
+        let newTasks = this.divArr
+
+       
+        // this.addSwitch();
+        //  if (newTasks.length>=0) {
+            newTask.tasksDiv.appendChild(newDiv)
+
+        //  }
+        
+
+
+
+
+
+        // this.addSwitch();
+        // if (newTasks.length==0)
+        //     {
+        //     let newTasksArr =  document.querySelectorAll('.task')
+        //     for (let i = 0; i < newTasksArr.length; i++) {
+        //         console.log('ABDI')
+        //         newTasksArr[i].classList.add('switch')
+        //     }
+        //     }
+        
+        // this.addSwitch();
+        // for (let i = 0; i < newTasks.length; i++) 
+        // {
+        //     console.log('KUNDI')
+        //     newTasks[i].classList.remove('switch')
+        // }
+        deleteTasks(newDiv,newTask)
+        newTask.editClick(newDiv,newTask)
     }
 
     touch(div){
+        
         div.addEventListener('click', () =>{
+            
             let tasks = this.divArr
+            
             if (tasks.length==0)
                 {
-                  let newTasks =  document.querySelectorAll('.task')
-                  for (let i = 0; i < newTasks.length; i++) {
-                    newTasks[i].classList.add('switch')
-                 }
+                let newTasks =  document.querySelectorAll('.task')
+                for (let i = 0; i < newTasks.length; i++) {
+                newTasks[i].classList.add('switch')
                 }
+                }
+            
             this.addSwitch();
             for (let i = 0; i < tasks.length; i++) 
             {
+                console.log(this)
                 tasks[i].classList.remove('switch')
             }
             
@@ -114,8 +218,10 @@ let projects = class{
     }
 
     addSwitch(){
+        
         if (!document.querySelectorAll('.task'))
             {
+                
                 return
             }
         else{

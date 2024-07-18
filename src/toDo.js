@@ -1,4 +1,4 @@
-import {createForm,inputDetails,editForm} from './task'
+import {createForm,inputDetails,editForm,inputTaskDetails} from './task'
 import {toggleClasses} from './dom'
 let toDoList = class {
     constructor(title,description,dueDate,priority,checked)
@@ -66,7 +66,14 @@ createDiv(newTask={}) {
         buttonsDiv.appendChild(editButton)
         return buttonsDiv
     }
-
+    createNewTaskDiv(project,a)
+    {
+        createForm();
+        toggleClasses();
+        inputTaskDetails(project,a);
+        // inputDetails(project,a);  
+        // projectDiv,a
+    }
 
     editClick(div,task) {     
         let editCheckBox = div.querySelector('#checkbox')           
@@ -99,11 +106,11 @@ createDiv(newTask={}) {
         })
     };
 
-    createNewTask(projectDiv,j=0){
+    createNewTask(project,j){
 
             createForm();
             toggleClasses();
-            inputDetails(projectDiv,j);                         // Clicks the Add button for Tasks
+            inputDetails(project,j);                         // Clicks the Add button for Tasks
     }
 
 }
