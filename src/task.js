@@ -140,7 +140,7 @@ let createForm = function(){
 };
 
 let inputDetails = function(projectDiv,j){
-    
+    // let userData = JSON.parse(localStorage.getItem('Projects'))
     let forms = document.querySelector('#forms')
     let titleInput = document.querySelector('#title')
     let dueDateInput = document.querySelector('#dueDate')
@@ -166,8 +166,8 @@ let inputDetails = function(projectDiv,j){
                 priorityInput = 3
             }
         let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
-        console.log(newTask)
             // console.log(localStorage)
+        
         userData[j].arr.push(newTask)
         
         
@@ -185,7 +185,7 @@ let inputDetails = function(projectDiv,j){
     })
 }
 let inputTaskDetails = function(project,a) {
-    // let userData  = (JSON.parse(localStorage.getItem('Projects')))
+
     let forms = document.querySelector('#forms')
     let titleInput = document.querySelector('#title')
     let dueDateInput = document.querySelector('#dueDate')
@@ -213,33 +213,42 @@ let inputTaskDetails = function(project,a) {
         let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
         
         
-        let data = localStorage.getItem('Projects');    
-        
-        let userLocal = JSON.parse(data)
-        userLocal[a].arr.push({title: '1', description: '1', dueDate: '2024-06-30', priority: 1, checked: false})
-        
-        console.log(newTask)
-        console.log(userLocal)
+           
+        let userLocal = JSON.parse(localStorage.getItem('Projects'))
+        userLocal[a].arr.push(newTask)
+
          project.arr.push(newTask)
         
-    
+         localStorage.setItem('Projects',JSON.stringify(userLocal))
         
 
         forms.remove()
         toggleClasses();
-        // enterDetails(newTask,project,a);
+        enterDetailsRefresh(newTask,project,a);
         
         
         event.preventDefault();
     })
 }
 
+function enterDetailsRefresh(newTask,projectDiv,a) {
+    let userLocal = JSON.parse(localStorage.getItem('Projects'))
+    let newDiv = newTask.createDiv(newTask)
+    userLocal[a].divArr.push((newDiv))
+    localStorage.setItem('Projects',JSON.stringify(userLocal))
+    projectDiv.divArr.push(newDiv)
+    newTask.tasksDiv.appendChild(newDiv)
+    deleteTasks(newDiv,newTask)
+    newTask.editClick(newDiv,newTask)
+}
+
+
+
 function enterDetails(newTask,projectDiv,a){
 
     let newDiv = newTask.createDiv(newTask)
     userData[a].divArr.push((newDiv))
     localStorage.setItem('Projects',JSON.stringify(userData))
-    // console.log(projectDiv)
     projectDiv.divArr.push(newDiv)
     newTask.tasksDiv.appendChild(newDiv)
     deleteTasks(newDiv,newTask)

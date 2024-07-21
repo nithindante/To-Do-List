@@ -43,10 +43,20 @@ let toggleClasses = (function () {
 
         let projects = document.querySelector('.projects')
         let tasks = document.querySelector('.tasks')
+
         projects.classList.toggle('switch')
         tasks.classList.toggle('switch')
+        console.log(projects)
+        console.log(tasks)
 })
 
+
+let removeClasses = (function name(params) {
+        let projects = document.querySelector('.projects')
+        let tasks = document.querySelector('.tasks')
+        projects.classList.add('switch')
+        tasks.classList.add('switch')
+})
 let addClasses = (function () {
 
         let projects = document.querySelector('.projects')
@@ -59,6 +69,7 @@ let addProjects = (function () {
                 
                 let addButton = document.querySelector('.addButton')
                 addButton.addEventListener('click',()=>{
+
                 let project = new projects();
                 project.newProject()
                 newArr.push(project)
@@ -67,20 +78,29 @@ let addProjects = (function () {
 
 });
 
+let newProjects = (function () {
+        let addButton = document.querySelector('.addButton')
+                addButton.addEventListener('click',()=>{
+
+                        let project = new projects();
+                        project.newProjects()
+                        // newArr.push(project)
+                        hoverEffect(); 
+                });
+});
 let createTasksDiv = (function(){
         let tasksHeader = document.createElement('div')
         tasksHeader.classList.add('tasksHeader')
-  
         let tasksHeading = document.createElement('h3')
         tasksHeading.textContent='Tasks'
         tasksHeader.appendChild(tasksHeading)
         let tasks = document.querySelector('.tasks')
         tasks.appendChild(tasksHeader)
-    });
+});
 
 
 
-export {basicLayout,toggleClasses,addClasses,createMainDiv,addProjects,createTasksDiv,newArr };
+export {basicLayout,toggleClasses,addClasses,createMainDiv,addProjects,createTasksDiv,newArr,newProjects,removeClasses };
 
 
 
