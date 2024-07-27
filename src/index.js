@@ -22,7 +22,6 @@ let importDivs = (function () {
         
         basicLayout();
         createMainDiv();
-        
         addProjects(); 
         createTasksDiv();
     }

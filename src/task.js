@@ -167,7 +167,7 @@ let inputDetails = function(projectDiv,j){
             }
         let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
             // console.log(localStorage)
-        
+            // console.log( userData[j])
         userData[j].arr.push(newTask)
         
         
@@ -210,14 +210,16 @@ let inputTaskDetails = function(project,a) {
             {
                 priorityInput = 3
             }
+
         let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
         
         
            
         let userLocal = JSON.parse(localStorage.getItem('Projects'))
+        
         userLocal[a].arr.push(newTask)
 
-         project.arr.push(newTask)
+        project.arr.push(newTask)
         
          localStorage.setItem('Projects',JSON.stringify(userLocal))
         

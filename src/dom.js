@@ -40,18 +40,14 @@ let createMainDiv = (function () {
         
 });
 let toggleClasses = (function () {
-
         let projects = document.querySelector('.projects')
         let tasks = document.querySelector('.tasks')
-
         projects.classList.toggle('switch')
         tasks.classList.toggle('switch')
-        console.log(projects)
-        console.log(tasks)
 })
 
 
-let removeClasses = (function name(params) {
+let removeClasses = (function () {
         let projects = document.querySelector('.projects')
         let tasks = document.querySelector('.tasks')
         projects.classList.add('switch')
@@ -74,6 +70,7 @@ let addProjects = (function () {
                 project.newProject()
                 newArr.push(project)
                 hoverEffect();      
+                event.preventDefault();
         });
 
 });
@@ -88,6 +85,18 @@ let newProjects = (function () {
                         hoverEffect(); 
                 });
 });
+
+// let newProjectsDiv = (function () {
+//         let addButton = document.querySelector('.addButton')
+//                 addButton.addEventListener('click',()=>{
+
+//                         let project = new projects();
+//                         project.newProjectsDivFrom()
+//                         // newArr.push(project)
+//                         hoverEffect(); 
+//                 });
+// });
+
 let createTasksDiv = (function(){
         let tasksHeader = document.createElement('div')
         tasksHeader.classList.add('tasksHeader')
