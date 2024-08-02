@@ -37,19 +37,13 @@ let projects = class{
                     userData = JSON.parse(localStorage.getItem('Projects'))
     }
 
-
-    addToMultipleLocals(){
-        let userLocal = JSON.parse(localStorage.getItem('Projects'))
-        console.log(userLocal)
-    }
-
     addToLocals(){
         let userLocal = JSON.parse(localStorage.getItem('Projects'))
-        console.log(userLocal)
+
         userLocal.push(this)
         localStorage.setItem("Projects", JSON.stringify(userLocal));
         userData = JSON.parse(localStorage.getItem('Projects'))
-        console.log(userLocal)
+
     }
     addtoMultiple(x)
     {
@@ -61,7 +55,6 @@ let projects = class{
         this.addToLocal()
     }
     newProject(){
-            let sum =0
             let  x = 0
             let div = this.createDiv();
             projectsArr.push(div)
@@ -70,78 +63,44 @@ let projects = class{
             this.deleteProjects(div);
             let projectsArr2 = document.querySelectorAll('.project')
             let len = projectsArr2.length
-            console.log(projectsArr2.length)
             for (let i = 0; i < len; i++) 
-            {
-                
-                console.log(len)
-                sum++;
-
-                if(i==len){
-
-                    console.log('anju')
-                    return
-                }
-                else{
-
-                
-                projectsArr2[i].addEventListener('submit', ()=> {
-                    
-                  
-                    let input = projectsArr2[i].querySelector('input')  
-                    if(x>0)
-                    {
-                        if(i==(len-1))
+            {         
+                    {                    
+                    projectsArr2[i].addEventListener('submit', ()=> {   
+                    if (projectsArr2[len-1].querySelector('input').value=='') 
                         {
-                            this.name = input.value; 
-                            let toDo = new toDoList;
-                            toDo.createNewTask(this,i)
-                            x++;
-                         event.preventDefault();
+                            return
                         }
-                        // console.log('cheepu')
-                    }
-                    else {
-                    this.touch(div); 
-                    this.name = input.value;
-                    let toDo = new toDoList;
-                    this.addtoMultiple(x)
-                    toDo.createNewTask(this,i)
-                    x++;
-                    event.preventDefault();
-                }
-
+                    else
+                    {
+                    let input = projectsArr2[i].querySelector('input')  
+                        if(x>0)
+                        {
+                            if(i==(len-1))
+                            {
+                                this.name = input.value; 
+                                let toDo = new toDoList;
+                                toDo.createNewTask(this,i)
+                                x++;
+                                event.preventDefault();
+                            }
+                        }
+                        else 
+                        {
+                        this.name = input.value;
+                        let toDo = new toDoList;
+                        this.addtoMultiple(x)
+                        toDo.createNewTask(this,i)
+                        x++;
+                        event.preventDefault();
+                        }
+            } 
                 })
+                this.touch(div);
             }
         }
-    }
-
-    // newProjectsDivFrom(){
-    //     let  x = 0
-    //     let div = this.createDiv();
-    //     projectsArr.push(div)
-    //     let projectsDiv = document.querySelector('.projects')
-    //     projectsDiv.appendChild(div);
-    //     this.deleteProjects(div);
-    //     let projectsArr2 = document.querySelectorAll('.project')
-    //     for (let i = 0; i < projectsArr2.length; i++) 
-    //     {
-    //         let input = projectsArr2[i].querySelector('input')     
-    //         projectsArr2[i].addEventListener('submit', ()=> {
-    //             console.log('andi')
-    //             this.name = input.value;
-    //             let toDo = new toDoList;
-    //             this.addtoMultiple(x)
-    //             toDo.createNewTask(this,i)
-    //             x++;
-    //             event.preventDefault();
-                
-    //         })
-    //     }
-
-    //     this.touch(div); 
-
     // }
+    }
     newProjects(){
         
         let  x = 0
@@ -151,18 +110,18 @@ let projects = class{
         projectsDiv.appendChild(div);
         this.deleteProjects(div);
         let projectsArr2 = document.querySelectorAll('.project')
+       
         for (let i = 0; i < projectsArr2.length; i++) 
         {
             let input = projectsArr2[i].querySelector('input')     
             projectsArr2[i].addEventListener('submit', ()=> {
-                console.log('andi')
+               
                 this.name = input.value;
                 let toDo = new toDoList;
                 this.addToLocals()
                 toDo.createNewTask(this,i)
                 x++;
                 event.preventDefault();
-                
             })
         }
 
@@ -179,7 +138,6 @@ let projects = class{
 
             let addNewTasksButton =  div.querySelector('.addTaskButton')
             addNewTasksButton.addEventListener('click',  ()=> {
-                    console.log('parii')
                     let toDo = new toDoList;
                     toDo.createNewTaskDiv(this,a)
                     i++;
@@ -257,14 +215,16 @@ let projects = class{
     }
 
     touch(div){
+       
         div.addEventListener('click', () =>{
 
             let tasks = this.divArr
-            
+
             if (tasks.length==0)
                 {
                 let newTasks =  document.querySelectorAll('.task')
                 for (let i = 0; i < newTasks.length; i++) {
+                   
                 newTasks[i].classList.add('switch')
                 }
                 }
@@ -280,7 +240,7 @@ let projects = class{
     }
 
     addSwitch(){
-        
+       
         if (!document.querySelectorAll('.task'))
             {
                 

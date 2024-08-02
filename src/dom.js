@@ -42,6 +42,7 @@ let createMainDiv = (function () {
 let toggleClasses = (function () {
         let projects = document.querySelector('.projects')
         let tasks = document.querySelector('.tasks')
+        console.log(tasks)
         projects.classList.toggle('switch')
         tasks.classList.toggle('switch')
 })
