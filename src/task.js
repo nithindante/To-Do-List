@@ -166,8 +166,7 @@ let inputDetails = function(projectDiv,j){
                 priorityInput = 3
             }
         let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
-            // console.log(localStorage)
-            // console.log( userData[j])
+
         userData[j].arr.push(newTask)
         
         

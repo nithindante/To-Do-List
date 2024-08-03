@@ -280,8 +280,6 @@ let projects = class{
         let projectDiv = document.createElement('form')
         projectDiv.classList.add('project')
         let name = document.createElement('input')
-        
-        // name.textContent=this.name;
         let deleteButton = document.createElement('button')
         deleteButton.classList.add('deleteProjects')
         let addButton = document.createElement('button')

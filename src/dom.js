@@ -42,7 +42,6 @@ let createMainDiv = (function () {
 let toggleClasses = (function () {
         let projects = document.querySelector('.projects')
         let tasks = document.querySelector('.tasks')
-        console.log(tasks)
         projects.classList.toggle('switch')
         tasks.classList.toggle('switch')
 })
@@ -66,12 +65,32 @@ let addProjects = (function () {
                 
                 let addButton = document.querySelector('.addButton')
                 addButton.addEventListener('click',()=>{
-
-                let project = new projects();
-                project.newProject()
-                newArr.push(project)
-                hoverEffect();      
-                event.preventDefault();
+                                        if(localProjectsArr.length==0){
+                                                let project = new projects();
+                                                project.newProject()
+                                                newArr.push(project)
+                                                localProjectsArr.push(project)
+                                                hoverEffect();      
+                                                event.preventDefault();
+                                        } 
+                                        else
+                                        {
+                                                for (let i = 0; i < localProjectsArr.length; i++) 
+                                                {
+                                                        if(i>=(localProjectsArr.length-1))
+                                                        {
+                                                                if(localProjectsArr[i].name!=undefined)
+                                                                        {
+                                                                                let project = new projects();
+                                                                                project.newProject()
+                                                                                newArr.push(project)
+                                                                                localProjectsArr.push(project)
+                                                                                hoverEffect();      
+                                                                                event.preventDefault();
+                                                                        }        
+                                                        }
+                                                }
+                                        }
         });
 
 });
@@ -79,24 +98,33 @@ let addProjects = (function () {
 let newProjects = (function () {
         let addButton = document.querySelector('.addButton')
                 addButton.addEventListener('click',()=>{
+                        if(localProjectsArr.length==0){
+                                let project = new projects();
+                                project.newProjects()
+                                localProjectsArr.push(project)
+                                hoverEffect();      
+                                event.preventDefault();
+                        } 
+                        else
+                                        {
+                                                for (let i = 0; i < localProjectsArr.length; i++) 
+                                                {
+                                                        if(i>=(localProjectsArr.length-1))
+                                                        {
+                                                                if(localProjectsArr[i].name!=undefined)
+                                                                        {
+                                                                                let project = new projects();
+                                                                                project.newProjects()
+                                                                                localProjectsArr.push(project)
+                                                                                hoverEffect();      
+                                                                                event.preventDefault();
+                                                                        }        
+                                                        }
+                                                }
+                                        }
 
-                        let project = new projects();
-                        project.newProjects()
-                        // newArr.push(project)
-                        hoverEffect(); 
                 });
 });
-
-// let newProjectsDiv = (function () {
-//         let addButton = document.querySelector('.addButton')
-//                 addButton.addEventListener('click',()=>{
-
-//                         let project = new projects();
-//                         project.newProjectsDivFrom()
-//                         // newArr.push(project)
-//                         hoverEffect(); 
-//                 });
-// });
 
 let createTasksDiv = (function(){
         let tasksHeader = document.createElement('div')
@@ -107,7 +135,6 @@ let createTasksDiv = (function(){
         let tasks = document.querySelector('.tasks')
         tasks.appendChild(tasksHeader)
 });
-
 
 
 export {basicLayout,toggleClasses,addClasses,createMainDiv,addProjects,createTasksDiv,newArr,newProjects,removeClasses };
