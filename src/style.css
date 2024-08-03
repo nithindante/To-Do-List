@@ -183,8 +183,13 @@ textarea{
     gap: 4rem;
   }
 
+.inactiveTask{
+  display: none;
+}
 
-
+.project>input{
+  border-radius: 1rem;
+}
 /*
   .container input {
     position: absolute;

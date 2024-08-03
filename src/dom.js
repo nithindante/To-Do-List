@@ -1,7 +1,10 @@
 import { toDoList } from "./toDo.js";
 import { projects } from "./projects.js";
-import {hoverEffect} from './logic.js'
+import { hoverEffect,projectsArr,touchEffect} from "./logic.js";
 let mainDiv = document.querySelector('#main')
+let newArr = []
+let localProjectsArr = []
+
 
 let basicLayout = (function () {
     let toDoHeader = document.createElement('h2')
@@ -16,20 +19,40 @@ let basicLayout = (function () {
     tasksDiv.classList.add('tasks')
     infoDiv.appendChild(tasksDiv)
     mainDiv.appendChild(infoDiv)
-    let project = new projects('Default');
+});
 
-    project.createMainDiv()
-    project.newProject()
-})();
+let createMainDiv = (function () {
+        let projectsDiv = document.querySelector('.projects')       
 
+        let projectsHeader = document.createElement('div')
+        projectsHeader.classList.add('projectsHeader')
+
+        let projectsHeading = document.createElement('h3')
+        projectsHeading.textContent='Projects'
+
+        let addButton = document.createElement('button')
+        addButton.classList.add('addButton')
+
+        projectsHeader.appendChild(projectsHeading)
+        projectsHeader.appendChild(addButton)
+        projectsDiv.appendChild(projectsHeader)
+        
+        
+});
 let toggleClasses = (function () {
-
         let projects = document.querySelector('.projects')
         let tasks = document.querySelector('.tasks')
         projects.classList.toggle('switch')
         tasks.classList.toggle('switch')
 })
 
+
+let removeClasses = (function () {
+        let projects = document.querySelector('.projects')
+        let tasks = document.querySelector('.tasks')
+        projects.classList.add('switch')
+        tasks.classList.add('switch')
+})
 let addClasses = (function () {
 
         let projects = document.querySelector('.projects')
@@ -38,8 +61,83 @@ let addClasses = (function () {
         tasks.classList.add('switch')
 })
 
+let addProjects = (function () {
+                
+                let addButton = document.querySelector('.addButton')
+                addButton.addEventListener('click',()=>{
+                                        if(localProjectsArr.length==0){
+                                                let project = new projects();
+                                                project.newProject()
+                                                newArr.push(project)
+                                                localProjectsArr.push(project)
+                                                hoverEffect();      
+                                                event.preventDefault();
+                                        } 
+                                        else
+                                        {
+                                                for (let i = 0; i < localProjectsArr.length; i++) 
+                                                {
+                                                        if(i>=(localProjectsArr.length-1))
+                                                        {
+                                                                if(localProjectsArr[i].name!=undefined)
+                                                                        {
+                                                                                let project = new projects();
+                                                                                project.newProject()
+                                                                                newArr.push(project)
+                                                                                localProjectsArr.push(project)
+                                                                                hoverEffect();      
+                                                                                event.preventDefault();
+                                                                        }        
+                                                        }
+                                                }
+                                        }
+        });
 
-export {basicLayout,toggleClasses,addClasses};
+});
+
+let newProjects = (function () {
+        let addButton = document.querySelector('.addButton')
+                addButton.addEventListener('click',()=>{
+                        if(localProjectsArr.length==0){
+                                let project = new projects();
+                                project.newProjects()
+                                localProjectsArr.push(project)
+                                hoverEffect();      
+                                event.preventDefault();
+                        } 
+                        else
+                                        {
+                                                for (let i = 0; i < localProjectsArr.length; i++) 
+                                                {
+                                                        if(i>=(localProjectsArr.length-1))
+                                                        {
+                                                                if(localProjectsArr[i].name!=undefined)
+                                                                        {
+                                                                                let project = new projects();
+                                                                                project.newProjects()
+                                                                                localProjectsArr.push(project)
+                                                                                hoverEffect();      
+                                                                                event.preventDefault();
+                                                                        }        
+                                                        }
+                                                }
+                                        }
+
+                });
+});
+
+let createTasksDiv = (function(){
+        let tasksHeader = document.createElement('div')
+        tasksHeader.classList.add('tasksHeader')
+        let tasksHeading = document.createElement('h3')
+        tasksHeading.textContent='Tasks'
+        tasksHeader.appendChild(tasksHeading)
+        let tasks = document.querySelector('.tasks')
+        tasks.appendChild(tasksHeader)
+});
+
+
+export {basicLayout,toggleClasses,addClasses,createMainDiv,addProjects,createTasksDiv,newArr,newProjects,removeClasses };
 
 
 

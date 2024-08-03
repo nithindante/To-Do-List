@@ -1,6 +1,7 @@
 import { toggleClasses } from './dom';
 import {toDoList} from './toDo'
-import {projects} from './projects'
+import { userData } from './projects';
+
 
 let createForm = function(div){
     let todoForm = document.createElement('form')
@@ -19,6 +20,7 @@ let createForm = function(div){
     dueDateLabel.setAttribute('for','dueDate')
     dueDateLabel.textContent = 'DueDate'
     let dueDate = document.createElement('input')
+    dueDate.setAttribute('type','date')
     dueDate.setAttribute('id','dueDate')
     dueDate.required=true;
 
@@ -137,8 +139,8 @@ let createForm = function(div){
     todoForm.appendChild(buttonDiv)
 };
 
-let inputDetails = function(div,sem){
-    console.log(sem)
+let inputDetails = function(projectDiv,j){
+    // let userData = JSON.parse(localStorage.getItem('Projects'))
     let forms = document.querySelector('#forms')
     let titleInput = document.querySelector('#title')
     let dueDateInput = document.querySelector('#dueDate')
@@ -149,8 +151,8 @@ let inputDetails = function(div,sem){
 
     let descriptionInput = document.querySelector('#description')
     let checkedInput = document.querySelector('#checkbox')
-    
-    forms.addEventListener('submit',function(){
+
+    forms.addEventListener('submit',()=>{
         if(document.querySelector('#priorityLow').checked===true)
             {
                  priorityInput = 1
@@ -164,16 +166,91 @@ let inputDetails = function(div,sem){
                 priorityInput = 3
             }
         let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
+
+        userData[j].arr.push(newTask)
+        
+        
+        projectDiv.arr.push(newTask)
+        
+    
+        
+
         forms.remove()
         toggleClasses();
-        enterDetails(newTask);
+        enterDetails(newTask,projectDiv,j);
+        
+        
         event.preventDefault();
+    })
+}
+let inputTaskDetails = function(project,a) {
 
+    let forms = document.querySelector('#forms')
+    let titleInput = document.querySelector('#title')
+    let dueDateInput = document.querySelector('#dueDate')
+
+
+    let priorityInput = document.querySelector('#priority')
+
+
+    let descriptionInput = document.querySelector('#description')
+    let checkedInput = document.querySelector('#checkbox')
+
+    forms.addEventListener('submit',()=>{
+        if(document.querySelector('#priorityLow').checked===true)
+            {
+                 priorityInput = 1
+            }
+        else if(document.querySelector('#priorityMid').checked===true)
+            {
+                priorityInput = 2
+            }
+        else if(document.querySelector('#priorityHigh').checked===true)
+            {
+                priorityInput = 3
+            }
+
+        let newTask = new toDoList(titleInput.value,descriptionInput.value,dueDateInput.value, priorityInput,checkedInput.checked)
+        
+        
+           
+        let userLocal = JSON.parse(localStorage.getItem('Projects'))
+        
+        userLocal[a].arr.push(newTask)
+
+        project.arr.push(newTask)
+        
+         localStorage.setItem('Projects',JSON.stringify(userLocal))
+        
+
+        forms.remove()
+        toggleClasses();
+        enterDetailsRefresh(newTask,project,a);
+        
+        
+        event.preventDefault();
     })
 }
 
-function enterDetails(newTask){
+function enterDetailsRefresh(newTask,projectDiv,a) {
+    let userLocal = JSON.parse(localStorage.getItem('Projects'))
     let newDiv = newTask.createDiv(newTask)
+    userLocal[a].divArr.push((newDiv))
+    localStorage.setItem('Projects',JSON.stringify(userLocal))
+    projectDiv.divArr.push(newDiv)
+    newTask.tasksDiv.appendChild(newDiv)
+    deleteTasks(newDiv,newTask)
+    newTask.editClick(newDiv,newTask)
+}
+
+
+
+function enterDetails(newTask,projectDiv,a){
+
+    let newDiv = newTask.createDiv(newTask)
+    userData[a].divArr.push((newDiv))
+    localStorage.setItem('Projects',JSON.stringify(userData))
+    projectDiv.divArr.push(newDiv)
     newTask.tasksDiv.appendChild(newDiv)
     deleteTasks(newDiv,newTask)
     newTask.editClick(newDiv,newTask)
@@ -228,6 +305,7 @@ let editForm = function (div,task) {
             checkedInput.checked = true
         }
         forms.addEventListener('submit',function () {
+            
         if (priorityLow.checked == true)
             {
                 priority =1 
@@ -245,4 +323,4 @@ let editForm = function (div,task) {
     })   
 }
 
-export{createForm,inputDetails,editForm,deleteTasks}
+export{createForm,inputDetails,editForm,deleteTasks,inputTaskDetails}
